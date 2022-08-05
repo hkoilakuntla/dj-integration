@@ -19,6 +19,16 @@ pipeline {
                 sh 'docker build -t survey-image:v1 .'
             }
         }
+        stage ('login to dockerhub') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage ('push image') {
+            steps {
+                sh 'docker push appstekhemanth/dj-survey:v1'
+            }
+        }
      
     } 
 }
