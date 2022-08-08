@@ -30,7 +30,7 @@ pipeline {
         }
         stage ('push image') {
             steps {
-                sh 'docker push appstekhemanth/dj-survey:v1'
+                sh 'docker push appstekhemanth/survey-image:v1'
             }
         }
      
