@@ -19,7 +19,6 @@ pipeline {
         }
         stage ('build docker image') {
             steps {
-                sh 'sudo groupadd docker'
                 sh 'sudo usermod -aG docker ${USER}'
                 sh 'su -s ${USER}'
                 sh 'docker build -t survey-image:v1 .'
