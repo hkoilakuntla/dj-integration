@@ -28,7 +28,7 @@ RUN a2enmod rewrite
 
 COPY php.ini /usr/local/etc/php/
 
-COPY /survey-api/ /var/www/survey-api/
+COPY . /var/www/survey-api/
 
 #COPY composer.json /var/www/survey-api/
 
