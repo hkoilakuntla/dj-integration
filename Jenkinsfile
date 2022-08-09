@@ -11,7 +11,7 @@ pipeline {
                 ws("/var/www/survey-api/tmp") {
                 //git branch: 'stage', credentialsId: 'survey-test', url: 'https://github.com/Appstekcorp-com/survey-api.git'
                 //sh "cd /var/www/survey-api"
-                sh "sudo git pull origin master"
+                sh "sudo git pull origin develop"
                 
                 }  
             }
@@ -20,7 +20,7 @@ pipeline {
         stage ('build docker image') {
             steps {
                 sh 'sudo chmod 777 /var/run/docker.sock'
-                sh 'docker build -t survey-image-master:v1 .'
+                sh 'docker build -t survey-image:v1 .'
             }
         }
         stage ('login to dockerhub') {
@@ -30,8 +30,8 @@ pipeline {
         }
         stage ('push image') {
             steps {
-                sh 'docker tag survey-image:v1 appstekhemanth/survey-image-master:v1'
-                sh 'docker push appstekhemanth/survey-image-master:v1'
+                sh 'docker tag survey-image:v1 appstekhemanth/survey-image:v1'
+                sh 'docker push appstekhemanth/survey-image:v1'
             }
         }
      
