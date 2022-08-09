@@ -19,10 +19,8 @@ pipeline {
         }
         stage ('build docker image') {
             steps {
-                sh 'sudo groupadd docker'
-                sh 'sudo usermod -aG docker ${USER}'
-                sh 'su -s ${USER}'
-                sh 'docker build -t survey-image:v1 .'
+                sh 'sudo chmod 777 /var/run/docker.sock'
+                sh 'docker build -t survey-image-master:v1 .'
             }
         }
         stage ('login to dockerhub') {
@@ -32,7 +30,8 @@ pipeline {
         }
         stage ('push image') {
             steps {
-                sh 'docker push appstekhemanth/dj-survey:v1'
+                sh 'docker tag survey-image:v1 appstekhemanth/survey-image-master:v1'
+                sh 'docker push appstekhemanth/survey-image-master:v1'
             }
         }
      
